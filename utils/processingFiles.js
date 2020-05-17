@@ -22,31 +22,21 @@ const creatingBookObject = (data) => {
 const parseRdfFiles = (idRdf, callback = () => {}) => {
     let filename = path.join(`${__dirname}`, '..', `data-files/epub/${idRdf}/pg${idRdf}.rdf`);
 
-    if(fs.existsSync(filename) && idRdf < 999999){
+    if(fs.existsSync(filename) && idRdf < 1000000 && idRdf){ // 1000000 - it is number of last file(cause we have file.length - 1, for good test). In real life projects we can create function for counting all our files.
         fs.readFile(filename, (err, data) => {
             const book = creatingBookObject(data);
             callback(book);
         });
 
-        idRdf++;
-        
-        if(idRdf){
-            return setTimeout(() => {parseRdfFiles(idRdf, callback)}, 500);
-        }else{
-            return true;
-        }
-    }else if(!fs.existsSync(filename) && idRdf < 999999) {
+        idRdf++;        
+        return setTimeout(() => {parseRdfFiles(idRdf, callback)}, 500);
+    }else if(!fs.existsSync(filename) && idRdf < 1000000 && idRdf) {
         idRdf++;
         return setTimeout(() => {parseRdfFiles(idRdf, callback)}, 500);
+    }else if(idRdf === 1000000) {
+        return true;
     }else {
         return false;
     }
 }
 module.exports.parseRdfFiles = parseRdfFiles;
-/* function test() {
-    parseRdfFiles(1, (book) => {
-        console.log(book);
-    })
-}
-
-test() */

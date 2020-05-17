@@ -3,9 +3,6 @@ const BookModel = require("../models/BooksModel");
 const parseRdf = require("../utils/processingFiles").parseRdfFiles;
 
 const BooksController = () => {
-    parseRdf(1, (book) => {
-        BookModel.create(book);
-    })
-    //BookModel.create();
+    return parseRdf;
 }
 module.exports.BooksController = BooksController;

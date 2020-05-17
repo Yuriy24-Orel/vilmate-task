@@ -9,7 +9,9 @@ if (isMainThread) {
         console.log(msg)
     });
 } else {
-    BooksController();
+    BooksController()(1, (book) => {
+        BookModel.create(book);
+    });
     parentPort.postMessage('BooksController()');
 }
 

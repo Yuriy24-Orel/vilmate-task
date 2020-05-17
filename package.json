@@ -4,7 +4,7 @@
   "description": "Packages for test task",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "author": "Yurii Orel",
   "license": "ISC",
